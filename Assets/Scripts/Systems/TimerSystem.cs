@@ -18,7 +18,7 @@ partial struct TimerSystem : ISystem
     {
         public float DeltaTime;
         public float TimerValue;
-        public void Execute(ref LocalTransform transform, in RotatingSpeedComponentData rot)
+        public void Execute(ref LocalTransform transform, in ColorTweenComponentData rot)
         {
             FindPrimeNumber(100);
             TimerValue += DeltaTime;

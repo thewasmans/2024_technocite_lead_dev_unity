@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
-public struct RotatingSpeedComponentData : IComponentData
+public struct ColorTweenComponentData : IComponentData
 {
-    public float Value;
+    public float4 colorA;
+    public float4 colorB;
 }

@@ -1,25 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class RotatingTimerAuthoring : MonoBehaviour
+public class TweenColor : MonoBehaviour
 {
-    public float rotationSpeed;
-    public float rotationTimeout;
-
-    private class Baker : Baker<RotatingTimerAuthoring>
+    public Color colorA;
+    public Color colorB;
+    private class Baker : Baker<TweenColor>
     {
-        public override void Bake(RotatingTimerAuthoring authoring)
+        public override void Bake(TweenColor authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent(entity, new RotatingSpeedComponentData{
-               Value = authoring.rotationSpeed
-            });
-            
-            AddComponent(entity, new TimerComponentData{
-               Value = authoring.rotationTimeout
+            AddComponent(entity, new ColorTweenComponentData{
+               colorA = new float4(authoring.colorA.r, authoring.colorA.g, authoring.colorA.b, authoring.colorA.a),
+               colorB = new float4(authoring.colorA.r, authoring.colorA.g, authoring.colorA.b, authoring.colorA.a)
             });
         }
     }

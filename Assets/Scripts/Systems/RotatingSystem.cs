@@ -21,10 +21,9 @@ partial struct RotatingSystem : ISystem
     {
         public float DeltaTime;
         public float time;
-        public void Execute(ref LocalTransform transform, in RotatingSpeedComponentData rot, ref TimerComponentData timer)
+        public void Execute(ref LocalTransform transform, in ColorTweenComponentData rot, ref TimerComponentData timer)
         {
-            transform = transform.RotateY(time < timer.Value ? rot.Value * DeltaTime : 0);
-            Debug.Log("time" + time);
+        //   SystemAPI.Query<RefRW<<>
         }
     }
 }
