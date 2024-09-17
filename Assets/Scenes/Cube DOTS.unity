@@ -167,10 +167,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SizeGrid: {x: 100, y: 291}
-  SpeedWave: 1.41
-  Amplitude: 6.17
-  Frequency: 8.74
+  SpeedWave: 1.2
+  Amplitude: 0.67
+  Frequency: 1.55
   Prefab: {fileID: 8716114111573509839, guid: dd6452fcc000a9f4498b1f7f647c30c1, type: 3}
+  ColorStart: {r: 0.990566, g: 0.28502133, b: 0.28502133, a: 0}
+  ColorEnd: {r: 0.14217694, g: 0.6698113, b: 0.17123185, a: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

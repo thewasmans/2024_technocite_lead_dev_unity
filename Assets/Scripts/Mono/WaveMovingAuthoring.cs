@@ -9,6 +9,9 @@ public class WaveMovingAuthoring : MonoBehaviour
     public float Frequency;
     public GameObject Prefab;
 
+    public Color ColorStart;
+    public Color ColorEnd;
+
     private class Baker : Baker<WaveMovingAuthoring>
     {
         public override void Bake(WaveMovingAuthoring authoring)
@@ -21,6 +24,12 @@ public class WaveMovingAuthoring : MonoBehaviour
                 SizeGrid = new System.Numerics.Vector2(authoring.SizeGrid.x, authoring.SizeGrid.y),
                 SpeedWave = authoring.SpeedWave,
                 Entity = GetEntity(authoring.Prefab, TransformUsageFlags.Dynamic)
+            });
+
+
+            AddComponent(entity, new WaveColorComponentData{
+                ColorStart = authoring.ColorStart,
+                ColorEnd = authoring.ColorEnd,
             });
         } 
     }

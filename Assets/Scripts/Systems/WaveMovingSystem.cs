@@ -13,20 +13,17 @@ partial struct WaveMovingSystem : ISystem
     {
         new WaveMovingJob(){
             Time = Time += SystemAPI.Time.DeltaTime,
-            Amplitude = 3,
-            Frequency = 2
         }.ScheduleParallel();
     }
 
     partial struct WaveMovingJob : IJobEntity
     {
         public float Time;
-        public float Amplitude;
-        public float Frequency;
         
-        public void Execute(ref LocalTransform transform, in CubePositionComponentData position)
+        public void Execute(ref LocalTransform transform, in CubePositionComponentData data)
         {
-            transform.Position = new float3(position.X, MathF.Sin(Time * Frequency) * Amplitude, position.Y);           
+            // transform.Position = new float3(data.X, MathF.Sin(Time * data.Frequency + data.X + data.Y) * data.Amplitude, data.Y);
+            transform.Position = new float3(data.X, MathF.Sin(MathF.Sin(data.X * data.Y) * Time * data.Frequency + data.X + data.Y) * data.Amplitude, data.Y);
         }
     }
 }
