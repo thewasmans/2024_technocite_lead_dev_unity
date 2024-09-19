@@ -1,27 +1,40 @@
 using Unity.Entities;
 using Unity.Transforms;
 using EntitiesAPI = Unity.Entities.SystemAPI;
-using System.Diagnostics;
 using UnityEngine;
-using Unity.VisualScripting;
+using System.Linq;
 
-partial struct DistanceCheckSystem : ISystem
+partial class DistanceCheckSystem : SystemBase
 {
-    // void onCreate(ref SystemState state) => Job = new DistanceCheckJob(){Entities = EntitiesAPI.Query<QueryEntities>() };
-
-    void onUpdate(ref SystemState state)
+    protected override void OnUpdate()
     {
-        UnityEngine.Debug.Log("start");
-        
-        foreach (var entity in EntitiesAPI.Query<QueryEntities>().WithEntityAccess())
+        Enabled = false;
+
+        // foreach (var aspect in EntitiesAPI.Query<LegoArtworkAspect>())
+        // {
+        //     EntityManager.AddComponent
+        // }
+
+        // EntityManager.GetAllEntities().
+
+        foreach (var entity in EntityManager.GetAllEntities())
         {
-            UnityEngine.Debug.Log("sd");
+            Debug.Log("enity");
+            if(EntityManager.HasComponent<LocalTransform>(entity) && EntityManager.HasComponent<LegoArtworkDataComponent>(entity))
+            {
+                Debug.Log("true");
+                var data = EntityManager.GetComponentData<LegoArtworkDataComponent>(entity);
+
+                EntityManager.AddComponentData(entity, new LocalTransform(){
+                    Position = data.point
+                });
+            }
         }
-        UnityEngine.Debug.Log("end");
     }
 }
 
-public readonly partial struct QueryEntities : IAspect 
+public readonly partial struct LegoArtworkAspect : IAspect
 {
     public readonly RefRO<LocalTransform> transform;
+    public readonly RefRO<LegoArtworkDataComponent> data;
 }
