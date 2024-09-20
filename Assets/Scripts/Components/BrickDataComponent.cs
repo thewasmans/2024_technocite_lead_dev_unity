@@ -7,4 +7,5 @@ public struct BrickDataComponent : IComponentData
     public float Scale;
     public bool EnableAnimation;
     public BlobAssetReference<PositionsBrick> Positions;
+    public BlobAssetReference<BrickId> Ids;
 }

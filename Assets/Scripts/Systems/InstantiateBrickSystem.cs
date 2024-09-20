@@ -1,6 +1,6 @@
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 partial class InstantiateBrickSystem : SystemBase
 {
@@ -12,12 +12,19 @@ partial class InstantiateBrickSystem : SystemBase
         
         for (int i = 0; i < brick.Positions.Value.Values.Length; i++)
         {
-            Unity.Mathematics.float3 position = brick.Positions.Value.Values[i];
+            float3 position = brick.Positions.Value.Values[i];
             
             Entity entity = EntityManager.Instantiate(brick.entityBrick);
 
             EntityManager.AddComponentData(entity, new LegoArtworkDataComponent(){
-                point = position
+                Point = position,
+                Id = i
+            });
+            
+            EntityManager.AddComponentData(entity,  new LocalTransform(){
+                Position = new float3(0,0,0),
+                Scale = 0,
+                Rotation = quaternion.identity
             });
         }
     }
