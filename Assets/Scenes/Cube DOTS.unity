@@ -276,8 +276,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrefabBrick: {fileID: 8003256650726128146, guid: 82993b16252dc0cc4a1d104b689ced7e, type: 3}
   artworkPoints: {fileID: 919132149155446097, guid: a011f82cdf2873b4cad320b88fa01dfb, type: 3}
-  Scale: 0.76
+  Scale: 0.34
   EnableAnimation: 0
+  random:
+    state: 981675935
 --- !u!33 &2021650623
 MeshFilter:
   m_ObjectHideFlags: 0
