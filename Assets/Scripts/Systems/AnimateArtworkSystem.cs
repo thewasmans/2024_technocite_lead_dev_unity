@@ -25,7 +25,12 @@ partial class AnimateArtworkSystem : SystemBase
         
         Time = Mathf.Clamp(Time + SystemAPI.Time.DeltaTime, 0, 1);
 
-        Index+=50;
+        Index+= brick.Steps;
+        if(Index >= brick.Positions.Value.Values.Length)
+        {
+            Index = brick.Positions.Value.Values.Length -1;
+        }
+        
         animateJob.brick = brick;
         animateJob.DeltaTime = SystemAPI.Time.DeltaTime;
         animateJob.MaxIndex = Index;
@@ -41,11 +46,7 @@ partial class AnimateArtworkSystem : SystemBase
          [BurstCompile]
         public void Execute(ref LocalTransform transform, ref LegoArtworkDataComponent data)
         {
-            int i;
-            for (i = 0; i < MaxIndex; i++)
-            {
-                if(brick.Ids.Value.Ids[i] == data.Id) break;
-            }
+            int i = 0;
             
             if(i >= MaxIndex) return;
 
