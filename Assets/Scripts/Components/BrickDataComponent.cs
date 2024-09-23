@@ -5,6 +5,8 @@ public struct BrickDataComponent : IComponentData
 {
     public Entity entityBrick;
     public float Scale;
+    public float Timing;
+    public int Steps;
     public bool EnableAnimation;
     public BlobAssetReference<PositionsBrick> Positions;
 }

@@ -11,8 +11,6 @@ using Unity.Mathematics;
 
 partial class AnimateArtworkSystem : SystemBase
 {
-    public float Time = .0f;
-    public int Index = 0;
     protected AnimateJob animateJob;
 
     protected override void OnCreate()
@@ -24,12 +22,9 @@ partial class AnimateArtworkSystem : SystemBase
     {
         BrickDataComponent brick = SystemAPI.GetSingleton<BrickDataComponent>();
         
-        Time = Mathf.Clamp(Time + SystemAPI.Time.DeltaTime, 0, 2 * math.PI);
-
-        Index+=1;
         animateJob.brick = brick;
+        animateJob.Timing = brick.Timing;
         animateJob.DeltaTime = SystemAPI.Time.DeltaTime;
-        animateJob.MaxIndex = Index;
         animateJob.ScheduleParallel();
     }
 
@@ -37,49 +32,21 @@ partial class AnimateArtworkSystem : SystemBase
     {
         public BrickDataComponent brick;
         public float DeltaTime;
+        public float Timing;
         public int MaxIndex;
         public float3 Position;
 
         [BurstCompile]
         public void Execute(ref LocalTransform transform, ref LegoArtworkDataComponent data)
         {
-            if(data.Id > MaxIndex) return;
-
-            float radius = math.length(data.Point);
-
-            Position = new float3(0,2,10);
-            var t = data.TimeAnimation;
-            var t2 = t * (5 * math.PI / 2) / (2 * math.PI);
-            float x = math.cos(t) * t * (1 / (2 * math.PI));
-            float y = math.sin(t2) * t2 * (2 / (5 * math.PI));
-            
             transform = new LocalTransform(){
-                // Position = new float3(data.Point.x * math.cos(data.TimeAnimation*6.4f)*data.TimeAnimation,
-                // data.Point.z,
-                // data.Point.y * math.sin(data.TimeAnimation*8f)*data.TimeAnimation)+Position,
-                Position = new float3(data.Point.x * x,
-                data.Point.z * x,
-                data.Point.y * y),
-                Scale = brick.Scale 
+                Position = new float3(data.Point.x * Timing / (1 + (data.Id * .15f ) * (1-Timing)),
+                data.Point.z * Timing / (1 + (data.Id * .15f ) * (1-Timing)),
+                data.Point.y * Timing / (1 + (data.Id * .15f ) * (1-Timing))),
+                Scale = brick.Scale,
+                Rotation = quaternion.identity
             };
-            //* Ease(data.TimeAnimation / (math.PI * 2))
-            // data.TimeAnimation = Mathf.Clamp(data.TimeAnimation + DeltaTime, 0, 1);
-            data.TimeAnimation = Mathf.Clamp(data.TimeAnimation + DeltaTime, 0, 2 * math.PI);
-        }
-
-        public float CircularEaseX(float t)
-        {
-            return math.cos(t) * t;
-        }
-
-        public float CircularEaseZ(float t)
-        {
-            return math.sin(t) * t;
-        }
-
-        public float Ease(float time)
-        {
-            return MathF.Sin(time);
+            data.TimeAnimation = Mathf.Clamp(data.TimeAnimation + DeltaTime, 0, .9f);
         }
     }
 }
