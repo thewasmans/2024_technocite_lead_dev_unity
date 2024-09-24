@@ -23,6 +23,7 @@ partial class AnimateArtworkSystem : SystemBase
         BrickDataComponent brick = SystemAPI.GetSingleton<BrickDataComponent>();
         
         animateJob.brick = brick;
+        animateJob.MaxIndex = brick.Positions.Value.Values.Length;
         animateJob.Timing = brick.Timing;
         animateJob.DeltaTime = SystemAPI.Time.DeltaTime;
         animateJob.ScheduleParallel();
@@ -40,9 +41,9 @@ partial class AnimateArtworkSystem : SystemBase
         public void Execute(ref LocalTransform transform, ref LegoArtworkDataComponent data)
         {
             transform = new LocalTransform(){
-                Position = new float3(data.Point.x * Timing / (1 + (data.Id * .15f ) * (1-Timing)),
-                data.Point.z * Timing / (1 + (data.Id * .15f ) * (1-Timing)),
-                data.Point.y * Timing / (1 + (data.Id * .15f ) * (1-Timing))),
+                Position = new float3(
+                    data.Point * math.clamp(Timing - data.Id *(1-Timing), 0, 1) 
+                ),
                 Scale = brick.Scale,
                 Rotation = quaternion.identity
             };
