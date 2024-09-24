@@ -12,8 +12,6 @@ public class BrickPrefabAuthoring : MonoBehaviour
     public GameObject PrefabBrick;
     public GameObject artworkPoints;
     public float Scale;
-
-    [Range(0,1.0f)]
     public float Timing;
     public int Steps;
     public bool EnableAnimation;

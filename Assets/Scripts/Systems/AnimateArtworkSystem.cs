@@ -1,11 +1,7 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 using SystemAPI = Unity.Entities.SystemAPI;
-using Unity.Entities.UniversalDelegates;
 using Unity.Burst;
 using Unity.Mathematics;
 
@@ -23,8 +19,7 @@ partial class AnimateArtworkSystem : SystemBase
         BrickDataComponent brick = SystemAPI.GetSingleton<BrickDataComponent>();
         
         animateJob.brick = brick;
-        animateJob.MaxIndex = brick.Positions.Value.Values.Length;
-        animateJob.Timing = brick.Timing;
+        animateJob.Timing+=SystemAPI.Time.DeltaTime;
         animateJob.DeltaTime = SystemAPI.Time.DeltaTime;
         animateJob.ScheduleParallel();
     }
@@ -40,14 +35,16 @@ partial class AnimateArtworkSystem : SystemBase
         [BurstCompile]
         public void Execute(ref LocalTransform transform, ref LegoArtworkDataComponent data)
         {
+            float src = data.Id*.1f;
+            float dst = data.Id*.1f+1f;
+            float value = math.clamp(Timing, src, dst);
+            value = math.remap(src, dst, 0, 1, value);
+            
             transform = new LocalTransform(){
-                Position = new float3(
-                    data.Point * math.clamp(Timing - data.Id *(1-Timing), 0, 1) 
-                ),
-                Scale = brick.Scale,
-                Rotation = quaternion.identity
+                Position = new float3(10,10,10)*(1-value) + data.Point * value,
+                Scale = brick.Scale * value,
+                Rotation = quaternion.Euler(Vector3.left * (1-value) + Vector3.forward * (1-value))
             };
-            data.TimeAnimation = Mathf.Clamp(data.TimeAnimation + DeltaTime, 0, .9f);
         }
     }
 }
