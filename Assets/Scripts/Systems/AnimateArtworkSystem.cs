@@ -19,7 +19,7 @@ partial class AnimateArtworkSystem : SystemBase
         BrickDataComponent brick = SystemAPI.GetSingleton<BrickDataComponent>();
         
         animateJob.brick = brick;
-        animateJob.Timing+=SystemAPI.Time.DeltaTime;
+        animateJob.Timing += SystemAPI.Time.DeltaTime * 1.0f;
         animateJob.DeltaTime = SystemAPI.Time.DeltaTime;
         animateJob.ScheduleParallel();
     }
@@ -35,13 +35,13 @@ partial class AnimateArtworkSystem : SystemBase
         [BurstCompile]
         public void Execute(ref LocalTransform transform, ref LegoArtworkDataComponent data)
         {
-            float src = data.Id*.1f;
-            float dst = data.Id*.1f+1f;
+            float src = data.Index*.01f;
+            float dst = data.Index*.01f+1f;
             float value = math.clamp(Timing, src, dst);
             value = math.remap(src, dst, 0, 1, value);
             
             transform = new LocalTransform(){
-                Position = new float3(10,10,10)*(1-value) + data.Point * value,
+                Position = (new float3(10,10,10) + data.Point) *(1-value) + data.Point * value,
                 Scale = brick.Scale * value,
                 Rotation = quaternion.Euler(Vector3.left * (1-value) + Vector3.forward * (1-value))
             };

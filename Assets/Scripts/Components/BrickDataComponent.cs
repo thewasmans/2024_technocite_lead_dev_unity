@@ -1,12 +1,14 @@
 using Unity.Entities;
-using Unity.Mathematics;
+using UnityEngine;
 
 public struct BrickDataComponent : IComponentData
 {
-    public Entity entityBrick;
+    public Entity entityBrickRed;
+    public Entity entityBrickYellow;
+    public Entity entityBrickGreen;
     public float Scale;
     public float Timing;
     public int Steps;
     public bool EnableAnimation;
-    public BlobAssetReference<PositionsBrick> Positions;
+    public BlobAssetReference<PositionsBrickPool> Positions;
 }
