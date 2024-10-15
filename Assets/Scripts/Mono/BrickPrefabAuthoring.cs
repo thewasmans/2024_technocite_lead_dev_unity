@@ -18,7 +18,12 @@ public class BrickPrefabAuthoring : MonoBehaviour
     public GameObject[] PrefabBrick;
     public GameObject artworkPoints;
     public float Scale;
+
+    [Range(0,10)]
+    public float SpeedAnimation;
+
     public Unity.Mathematics.Random random = Unity.Mathematics.Random.CreateFromIndex(0);
+    public Vector3 SpawnPosition;
 
     private class Baker : Baker<BrickPrefabAuthoring>
     {
@@ -48,8 +53,15 @@ public class BrickPrefabAuthoring : MonoBehaviour
                 entityBrickGreen = GetEntity(authoring.PrefabBrick[1], TransformUsageFlags.Dynamic),
                 entityBrickYellow = GetEntity(authoring.PrefabBrick[2], TransformUsageFlags.Dynamic),
                 Scale = authoring.Scale,
-                Positions = PositionsBrickPool.CreateArrayPositionsBrickGropuped(transformsID),
+                SpeedAnimation = authoring.SpeedAnimation,
+                Transforms = TransformBrickPool.CreateArrayPositionsBrickGropuped(transformsID),
+                SpawnPosition = authoring.SpawnPosition
             });
         }
+    }
+
+    private void OnGUI()
+    {
+        if(GUI.Button(new Rect(10,10, 100, 100), "CLICK"));
     }
 }

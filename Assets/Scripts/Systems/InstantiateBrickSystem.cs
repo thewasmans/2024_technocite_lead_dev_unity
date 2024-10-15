@@ -13,10 +13,11 @@ partial class InstantiateBrickSystem : SystemBase
 
         UnityEngine.Random.InitState(0);
         
-        for (int i = 0; i < brick.Positions.Value.Positions.Length; i++)
+        for (int i = 0; i < brick.Transforms.Value.TransformBricks.Length; i++)
         {
-            float3 position = brick.Positions.Value.Positions[i].Position;
-            float id = brick.Positions.Value.Positions[i].Id;
+            float3 position = brick.Transforms.Value.TransformBricks[i].Position;
+            float3 rotation = brick.Transforms.Value.TransformBricks[i].Rotation;
+            float id = brick.Transforms.Value.TransformBricks[i].Id;
 
             Entity entity;
             var r = UnityEngine.Random.Range(0, 3);
@@ -36,8 +37,8 @@ partial class InstantiateBrickSystem : SystemBase
                 Point = position,
                 IdGroup = id,
                 Index = i + UnityEngine.Random.Range(0,1.0f),
-                IndexNormalized = i / brick.Positions.Value.Positions.Length,
-                Rotation = new float3(eulerAngles)
+                IndexNormalized = i / brick.Transforms.Value.TransformBricks.Length,
+                Rotation = rotation
             });
             
             EntityManager.AddComponentData(entity,  new LocalTransform(){

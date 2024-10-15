@@ -19,7 +19,7 @@ partial class AnimateArtworkSystem : SystemBase
         BrickDataComponent brick = SystemAPI.GetSingleton<BrickDataComponent>();
         
         animateJob.brick = brick;
-        animateJob.Timing += SystemAPI.Time.DeltaTime * 1.0f;
+        animateJob.Timing += SystemAPI.Time.DeltaTime * brick.SpeedAnimation;
         animateJob.DeltaTime = SystemAPI.Time.DeltaTime;
         animateJob.ScheduleParallel();
     }
@@ -41,9 +41,9 @@ partial class AnimateArtworkSystem : SystemBase
             value = math.remap(src, dst, 0, 1, value);
             
             transform = new LocalTransform(){
-                Position = (new float3(10,10,10) + data.Point) *(1-value) + data.Point * value,
+                Position = (brick.SpawnPosition + data.Point) *(1-value) + data.Point * value,
                 Scale = brick.Scale * value,
-                Rotation = quaternion.Euler(Vector3.left * (1-value) + Vector3.forward * (1-value))
+                Rotation = quaternion.Euler(data.Rotation * (1-value) * 2)
             };
         }
     }
