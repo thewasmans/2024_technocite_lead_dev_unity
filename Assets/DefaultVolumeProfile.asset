@@ -151,7 +151,7 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 0.99347466, z: 0.9882896, w: 0}
   gamma:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   master:
     m_OverrideState: 1
     m_Value:
-      <length>k__BackingField: 2
+      <length>k__BackingField: 5
       m_Loop: 0
       m_ZeroValue: 0
       m_Range: 1
@@ -239,6 +239,33 @@ MonoBehaviour:
           value: 0
           inSlope: 1
           outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.17966102
+          value: 0.09122807
+          inSlope: 1.3397607
+          outSlope: 1.3397607
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.45932204
+          value: 0.4877193
+          inSlope: -0.044360835
+          outSlope: -0.044360835
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.8220339
+          value: 0.18596494
+          inSlope: 1.061632
+          outSlope: 1.061632
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -415,7 +442,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.11117613}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -499,7 +526,6 @@ MonoBehaviour:
   - {fileID: -3275050785515349220}
   - {fileID: 5410152604877483112}
   - {fileID: -4749391582510936375}
-  - {fileID: 7930089582283885258}
   - {fileID: 6107147543046681843}
   - {fileID: 5014274372891528174}
   - {fileID: 2786595811740892321}
@@ -507,7 +533,6 @@ MonoBehaviour:
   - {fileID: 6094724380203518518}
   - {fileID: -993949213121452490}
   - {fileID: -1250326128770382832}
-  - {fileID: -9131368291758398508}
 --- !u!114 &2786595811740892321
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -526,13 +551,13 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 1.31
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 7.69
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.68
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -616,13 +641,13 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.116
   smoothness:
     m_OverrideState: 1
     m_Value: 0.2
   rounded:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
 --- !u!114 &5410152604877483112
 MonoBehaviour:
   m_ObjectHideFlags: 3
