@@ -43,7 +43,7 @@ partial class AnimateArtworkSystem : SystemBase
             transform = new LocalTransform(){
                 Position = (brick.SpawnPosition + data.Point) *(1-value) + data.Point * value,
                 Scale = brick.Scale * value,
-                Rotation = quaternion.Euler(data.Rotation * (1-value) * 2)
+                Rotation = quaternion.Euler(data.Rotation * (1-value) * 10)
             };
         }
     }
