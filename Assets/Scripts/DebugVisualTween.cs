@@ -15,6 +15,15 @@ public class DebugVisualTween : MonoBehaviour
     
     public float Speed;
 
+    public GameObject artworks;
+
+    private void Start()
+    {
+        Transform[] transforms = artworks.GetComponentsInChildren<Transform>();
+        new ParseBricks().Parse(transforms.ToList().GetRange(1, transforms.Length-1));
+        Debug.Log("Start");
+    }
+
     private void OnDrawGizmos()
     {
         DrawGridArea();
