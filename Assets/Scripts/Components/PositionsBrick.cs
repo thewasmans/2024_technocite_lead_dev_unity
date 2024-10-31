@@ -5,7 +5,7 @@ using Unity.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
-public struct TransformBrick
+public struct TransformLego
 {
     public float3 Position;
     public float3 Rotation;
@@ -15,7 +15,7 @@ public struct TransformBrick
 
 public struct TransformBrickPool
 {
-    public BlobArray<TransformBrick> TransformBricks;
+    public BlobArray<TransformLego> TransformBricks;
     
     public static BlobAssetReference<TransformBrickPool> CreateArrayPositionsBrick(Transform[] transforms)
     {
@@ -29,7 +29,7 @@ public struct TransformBrickPool
 
         for (int i = 0; i < transforms.Count(); i++)
         {
-            arrayBuilder[i] = new TransformBrick() {
+            arrayBuilder[i] = new TransformLego() {
                 Position = transforms[i].position,
                 Id = i,
             };
@@ -54,7 +54,7 @@ public struct TransformBrickPool
 
         for (int i = 0; i < transforms.Count(); i++)
         {
-            arrayBuilder[i] = new TransformBrick() {
+            arrayBuilder[i] = new TransformLego() {
                 Position = transforms[i].Transform.position,
                 Rotation = Vector3.one * UnityEngine.Random.Range(-1.0f,1.0f),
                 Id = transforms[i].Id,
