@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Unity.Entities.UI;
 using UnityEngine;
 
 public class DebugVisualTween : MonoBehaviour
@@ -17,7 +16,7 @@ public class DebugVisualTween : MonoBehaviour
 
     public GameObject artworks;
 
-    private void Start()
+    private void Start() 
     {
         Transform[] transforms = artworks.GetComponentsInChildren<Transform>();
         new ParseBricks().Parse(transforms.ToList().GetRange(1, transforms.Length-1));

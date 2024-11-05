@@ -69,7 +69,7 @@ public class BrickAnimGO : MonoBehaviour
     {
         var startPosition = StartAnimate.transform.position;
 
-        var stepTime = Duration / bricks.Count;
+        var stepTime = 1.0f / bricks.Count;
         
         for (int i = 0; i < bricks.Count; i++)
         {
