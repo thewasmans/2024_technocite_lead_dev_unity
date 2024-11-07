@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83a2255e0b03794ab2289528221577b, type: 3}
   m_Name: Brick2x2
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 919132149155446097, guid: 7fd0ccae4f2c2144fb9891ee62887d00, type: 3}
+  Prefab: {fileID: 4897537663234673627, guid: 801f41311fd96454daaec3690fe7fa28, type: 3}
   Type: 2
   Dimension: {x: 2, y: 2}
