@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 public class DebugVisualTween : MonoBehaviour
@@ -19,8 +18,6 @@ public class DebugVisualTween : MonoBehaviour
     private void Start() 
     {
         Transform[] transforms = artworks.GetComponentsInChildren<Transform>();
-        // new ParseBricks().Parse(transforms.ToList().GetRange(1, transforms.Length-1));
-        Debug.Log("Start");
     }
 
     private void OnDrawGizmos()

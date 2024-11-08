@@ -1022,7 +1022,7 @@ GameObject:
   - component: {fileID: 313653081}
   - component: {fileID: 313653080}
   m_Layer: 0
-  m_Name: Directional Light (1)
+  m_Name: Light 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1121,12 +1121,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313653079}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -7.45, y: 0.5, z: -4.3}
+  m_LocalRotation: {x: 0.0711872, y: 0.58536637, z: -0.5487351, w: 0.5925947}
+  m_LocalPosition: {x: 2.8850217, y: 4.9295416, z: 12.791705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 975867328}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &335812038
 PrefabInstance:
@@ -3639,7 +3639,9 @@ Transform:
   m_LocalPosition: {x: 3.72, y: 4.1, z: 3.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1100945639}
+  - {fileID: 313653082}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 36.3, y: -136.71, z: 0}
 --- !u!114 &975867329
@@ -4137,7 +4139,7 @@ GameObject:
   - component: {fileID: 1100945638}
   - component: {fileID: 1100945640}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Light 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4213,12 +4215,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100945637}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -7.45, y: 3, z: -4.3}
+  m_LocalRotation: {x: 0.0711872, y: 0.58536637, z: -0.5487351, w: 0.5925947}
+  m_LocalPosition: {x: 2.8850217, y: 6.9443626, z: 11.311672}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 975867328}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1100945640
 MonoBehaviour:
@@ -118406,8 +118408,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 975867328}
-  - {fileID: 1100945639}
-  - {fileID: 313653082}
   - {fileID: 1041198455}
   - {fileID: 543450652582080909}
   - {fileID: 1727579910}

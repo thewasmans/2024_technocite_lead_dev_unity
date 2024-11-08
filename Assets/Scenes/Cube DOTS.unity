@@ -277,7 +277,7 @@ MonoBehaviour:
   - {fileID: 2092703126550063500, guid: d0fffbd0f2c56954088747d50170f3af, type: 3}
   - {fileID: 2092703126550063500, guid: a9d09a21a5ef6524594889e218fdb36f, type: 3}
   artworkPoints: {fileID: 919132149155446097, guid: aba0713cbf426ac4fb13829d50537156, type: 3}
-  Scale: 0.17
+  Scale: 0.195
   SpeedAnimation: 2.99
   random:
     state: 3303

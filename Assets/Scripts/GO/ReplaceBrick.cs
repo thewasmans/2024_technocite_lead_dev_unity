@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+public enum BrickType
+{
+    Brick_1x1,
+    Brick_2x1,
+    Brick_2x2,
+    Brick_2x4,
+}
 
 public struct BrickTransform
 {
