@@ -28,21 +28,20 @@ public class BrickPrefabAuthoring : MonoBehaviour
         {
             Entity entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            Transform[] transforms = authoring.artworkPoints.GetComponentsInChildren<Transform>();
-            transforms = transforms.OrderBy(t => t.position.y).ToArray();
-            IEnumerable<IGrouping<float, Transform>> transformGroupByY = transforms.GroupBy(t => t.position.y);
+            Transform[] transforms = authoring
+                .artworkPoints
+                .GetComponentsInChildren<Transform>()
+                .OrderBy(t => t.position.y)
+                .ToArray();
 
             List<TransformID> transformsID = new List<TransformID>();
 
-            foreach (var group in transformGroupByY)
+            foreach (var transform in transforms)
             {
-                foreach (var transform in group)
-                {
-                    transformsID.Add(new TransformID(){
-                        Id = group.Key,
-                        Transform = transform
-                    });
-                }
+                transformsID.Add(new TransformID(){
+                    Id = 0,
+                    Transform = transform
+                });
             }
  
             AddComponent(entity, new BrickDataComponent(){ 
