@@ -7,13 +7,12 @@ public class AnimationSO : ScriptableObject
     public float Duration;
     public float Speed;
     public float Phase;
-    public int Quantity;
 
-    public float Ease(int index, float time)
+    public float Ease(int index, float time, float quantity)
     {
-        var stepTime = 1.0f / Quantity;
+        var stepTime = 1.0f / quantity;
 
-        var d = Phase / Quantity * index;
+        var d = Phase / quantity * index;
 
         float src = index * stepTime - d;
         float dst = index * stepTime + stepTime - d;

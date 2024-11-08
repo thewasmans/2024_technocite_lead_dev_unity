@@ -1,7 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+public struct BrickTransform
+{
+    public BrickSO BrickSO;
+    public Transform Transform;
+}
 
 public class ReplaceBrick : MonoBehaviour
 {
@@ -12,17 +17,14 @@ public class ReplaceBrick : MonoBehaviour
     public Transform Current;
     public Transform[] Pattern;
 
-    public float WaitValue;
-
     private void Start()
     {
         Random.InitState(0);
-        Parse(TransformBricks);
     }
 
-    public void Parse(Transform[] transformBricks)
+    public List<BrickTransform> Parse(Transform[] transformBricks)
     {
-        List<TransformBlock> blocks = new();
+        List<BrickTransform> Blocks = new();
         
         TransformsRestants = transformBricks.OrderBy(p => Random.value).ToList();
 
@@ -30,25 +32,41 @@ public class ReplaceBrick : MonoBehaviour
 
         while(TransformsRestants.Count > 0)
         {
-            var pattern = SelectRandomBlock();
+            var indexPattern = SelectRandomBlock();
+            var pattern = BricksSOs[indexPattern];
             Current = TransformsRestants[0];
 
-            Transform[] transformPatterns = PatterAvailable(Current, TransformsRestants, pattern.Dimension);
-            Pattern = transformPatterns;
+            Pattern = PatterAvailable(Current, TransformsRestants, pattern.Dimension);
+            // indexPattern--;
+            // while(Pattern.Length == 0 && indexPattern > 0)
+            // {
+            //     Pattern = PatterAvailable(Current, TransformsRestants, BricksSOs[indexPattern].Dimension);
+            //     indexPattern--;
+            // }
+
             GameObject instance;
-            if(transformPatterns.Length == 0)
+            
+            if(Pattern.Length == 0)
             {
                 TransformsRestants.Remove(Current);
                 instance = Instantiate(BricksSOs[0].Prefab);
             }
             else
             {
-                transformPatterns.ToList().ForEach(t => TransformsRestants.Remove(t));
+                Pattern.ToList().ForEach(t => TransformsRestants.Remove(t));
                 instance = Instantiate(pattern.Prefab);
             }
+            
+            Blocks.Add(new BrickTransform(){
+                Transform = instance.transform,
+                BrickSO = pattern
+            });
+
             instance.transform.position = Current.position;
-            instance.transform.localScale = Vector3.one;
+            instance.transform.localScale = Vector3.one *.2f;
         }
+
+        return Blocks;
     }
     
     public Transform[] PatterAvailable(Transform current, List<Transform> transforms, Vector2Int pattern)
@@ -73,27 +91,10 @@ public class ReplaceBrick : MonoBehaviour
         return neighbors.Count != pattern.x * pattern.y ? new Transform[0]{} : neighbors.ToArray();
     }
 
-    public List<Transform> SearchNeighbors(Transform current, Transform[] transforms)
-    {
-        List<Transform> neighbors = new();
-
-        return neighbors
+    public List<Transform> SearchNeighbors(Transform current) => new List<Transform>()
         .Where(t => t.position.y == current.position.y)
-        .Where(t => Vector3.Distance(t.position, current.position) <= MAX_DISTANCE_NEIGHBORS).ToList();
-    }
+        .Where(t => Vector3.Distance(t.position, current.position) <= MAX_DISTANCE_NEIGHBORS)
+        .ToList();
 
-    public BrickSO SelectRandomBlock()
-    {
-        return BricksSOs[Random.Range(1, BricksSOs.Length)];
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Pattern.ToList().ForEach(t => Gizmos.DrawSphere(t.transform.position, .1f));
-
-        Gizmos.color = Color.red;
-        if(Current)
-            Gizmos.DrawSphere(Current.transform.position, .1f);
-    }
+    public int SelectRandomBlock() => Random.Range(1, BricksSOs.Length);
 }
