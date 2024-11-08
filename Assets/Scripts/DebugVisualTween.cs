@@ -19,7 +19,7 @@ public class DebugVisualTween : MonoBehaviour
     private void Start() 
     {
         Transform[] transforms = artworks.GetComponentsInChildren<Transform>();
-        new ParseBricks().Parse(transforms.ToList().GetRange(1, transforms.Length-1));
+        // new ParseBricks().Parse(transforms.ToList().GetRange(1, transforms.Length-1));
         Debug.Log("Start");
     }
 

@@ -11,17 +11,17 @@ partial class AnimateArtworkSystem : SystemBase
 
     protected override void OnCreate()
     {
-        // animateJob = new AnimateJob();
+        animateJob = new AnimateJob();
     }
 
     protected override void OnUpdate()
     {
-        // BrickDataComponent brick = SystemAPI.GetSingleton<BrickDataComponent>();
+        BrickDataComponent brick = SystemAPI.GetSingleton<BrickDataComponent>();
         
-        // animateJob.brick = brick;
-        // animateJob.Timing += SystemAPI.Time.DeltaTime * brick.SpeedAnimation;
-        // animateJob.DeltaTime = SystemAPI.Time.DeltaTime;
-        // animateJob.ScheduleParallel();
+        animateJob.brick = brick;
+        animateJob.Timing += SystemAPI.Time.DeltaTime * brick.SpeedAnimation;
+        animateJob.DeltaTime = SystemAPI.Time.DeltaTime;
+        animateJob.ScheduleParallel();
     }
 
     public partial struct AnimateJob : IJobEntity 

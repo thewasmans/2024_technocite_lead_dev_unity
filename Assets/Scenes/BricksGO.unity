@@ -3902,6 +3902,7 @@ MonoBehaviour:
   Dephasage: 0.9
   PlayDebug: 0
   ReplaceBrick: {fileID: 0}
+  AnimationSO: {fileID: 11400000, guid: 90a5ea28a7df5ae49b1801c72ae85c1a, type: 2}
 --- !u!1001 &1048726723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6211,8 +6212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d277c4adb7c684da097c05bb8f56fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedRotate: 1
-  SpeedScale: 1
+  SpeedRotate: 5
+  SpeedScale: 0
+  Camera: {fileID: 0}
 --- !u!1001 &1736963950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19299,6 +19301,7 @@ MonoBehaviour:
   Dephasage: 0.995
   PlayDebug: 1
   ReplaceBrick: {fileID: 919132148125641529}
+  AnimationSO: {fileID: 11400000, guid: 90a5ea28a7df5ae49b1801c72ae85c1a, type: 2}
 --- !u!114 &919132148125641529
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Entities.UniversalDelegates;
-using Unity.Mathematics;
 using UnityEngine;
 
 public struct TransformID
@@ -58,10 +55,5 @@ public class BrickPrefabAuthoring : MonoBehaviour
                 SpawnPosition = authoring.SpawnPosition
             });
         }
-    }
-
-    private void OnGUI()
-    {
-        if(GUI.Button(new Rect(10,10, 100, 100), "CLICK"));
     }
 }
