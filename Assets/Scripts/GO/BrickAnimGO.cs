@@ -24,7 +24,6 @@ public class BrickAnimGO : MonoBehaviour
     [Range(0, 1.0f)]
     public float Dephasage = 1;
     public bool PlayDebug;
-    public ReplaceBrick ReplaceBrick;
     public AnimationSO AnimationSO;
 
     void Start()
@@ -33,10 +32,8 @@ public class BrickAnimGO : MonoBehaviour
 
         List<Transform> transforms;
         
-        if(ReplaceBrick)
-            transforms = ReplaceBrick.Parse(ReplaceBrick.TransformBricks).Select(p => p.Transform).ToList();
-        else
-            transforms = Artwork.GetComponentsInChildren<Transform>().ToList();
+        // transforms = ReplaceBrick.Parse(ReplaceBrick.TransformBricks).Select(p => p.Transform).ToList();
+        transforms = Artwork.GetComponentsInChildren<Transform>().ToList();
 
         UnityEngine.Random.InitState(42);
         

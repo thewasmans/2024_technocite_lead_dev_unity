@@ -15,3 +15,4 @@ MonoBehaviour:
   Prefab: {fileID: 3806338742096138942, guid: 3de487c87360d524899fda23ce652936, type: 3}
   Type: 1
   Dimension: {x: 1, y: 2}
+  Id: 1

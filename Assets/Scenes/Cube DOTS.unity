@@ -272,13 +272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0362978249780fa08833bf8fa6a60de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabBrick:
-  - {fileID: 2092703126550063500, guid: ba1a4dd64645f4044b5771cf13a7474c, type: 3}
-  - {fileID: 2092703126550063500, guid: d0fffbd0f2c56954088747d50170f3af, type: 3}
-  - {fileID: 2092703126550063500, guid: a9d09a21a5ef6524594889e218fdb36f, type: 3}
-  artworkPoints: {fileID: 919132149155446097, guid: aba0713cbf426ac4fb13829d50537156, type: 3}
-  Scale: 0.195
-  SpeedAnimation: 2.99
+  Artwork: {fileID: 11400000, guid: 596725d68ba23f944b9e2ff272840d69, type: 2}
+  Scale: 0.37
+  SpeedAnimation: 0.63
   random:
     state: 3303
   SpawnPosition: {x: 5, y: 9.59, z: 5}

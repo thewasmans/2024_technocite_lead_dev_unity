@@ -4,16 +4,9 @@ using System.Linq;
 using Unity.Entities;
 using UnityEngine;
 
-public struct TransformID
-{
-    public float Id;
-    public Transform Transform;
-}
-
 public class BrickPrefabAuthoring : MonoBehaviour
 {
-    public GameObject[] PrefabBrick;
-    public GameObject artworkPoints;
+    public ArtworkSO Artwork;
     public float Scale;
 
     [Range(0,10)]
@@ -28,30 +21,26 @@ public class BrickPrefabAuthoring : MonoBehaviour
         {
             Entity entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            Transform[] transforms = authoring
-                .artworkPoints
-                .GetComponentsInChildren<Transform>()
-                .OrderBy(t => t.position.y)
-                .ToArray();
+            List<BrickTransform> brickTransforms = new ReplaceBrick(){
+                BricksSOs = authoring.Artwork.PrefabsBricks
+            }.Parse(authoring.Artwork.TransformBricks);
+            // transforms = transforms.OrderBy(t => t.Transform.position.y);
 
-            List<TransformID> transformsID = new List<TransformID>();
+            authoring.Artwork.PrefabsBricks.ToList().ForEach(p => p.Entity = GetEntity(p.Prefab, TransformUsageFlags.Dynamic));
 
-            foreach (var transform in transforms)
+            AddComponent(entity, new BrickDataComponent()
             {
-                transformsID.Add(new TransformID(){
-                    Id = 0,
-                    Transform = transform
-                });
-            }
- 
-            AddComponent(entity, new BrickDataComponent(){ 
-                entityBrickRed = GetEntity(authoring.PrefabBrick[0], TransformUsageFlags.Dynamic),
-                entityBrickGreen = GetEntity(authoring.PrefabBrick[1], TransformUsageFlags.Dynamic),
-                entityBrickYellow = GetEntity(authoring.PrefabBrick[2], TransformUsageFlags.Dynamic),
-                Scale = authoring.Scale,
+                Scale = authoring.Artwork.ScaleBrick,
                 SpeedAnimation = authoring.SpeedAnimation,
-                Transforms = TransformBrickPool.CreateArrayPositionsBrickGropuped(transformsID),
-                SpawnPosition = authoring.SpawnPosition
+                Transforms = TransformBrickPool.CreateArrayPositionsBrickGropuped(brickTransforms),
+                BrickPrefabs =  PrefabBrickPool.CreateArrayPrefabsBricks(authoring.Artwork.PrefabsBricks),
+                SpawnPosition = authoring.SpawnPosition,
+                Brick_1x1 = GetEntity(authoring.Artwork.PrefabsBricks[0].Prefab, TransformUsageFlags.Dynamic),
+                Brick_1x2 = GetEntity(authoring.Artwork.PrefabsBricks[1].Prefab, TransformUsageFlags.Dynamic),
+                Brick_2x1 = GetEntity(authoring.Artwork.PrefabsBricks[2].Prefab, TransformUsageFlags.Dynamic),
+                Brick_2x2 = GetEntity(authoring.Artwork.PrefabsBricks[3].Prefab, TransformUsageFlags.Dynamic),
+                Brick_2x4 = GetEntity(authoring.Artwork.PrefabsBricks[4].Prefab, TransformUsageFlags.Dynamic),
+                Brick_4x2 = GetEntity(authoring.Artwork.PrefabsBricks[5].Prefab, TransformUsageFlags.Dynamic),
             });
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
 public enum BrickType
 {
     Brick_1x1,
@@ -15,7 +16,7 @@ public struct BrickTransform
     public Transform Transform;
 }
 
-public class ReplaceBrick : MonoBehaviour
+public class ReplaceBrick
 {
     const float MAX_DISTANCE_NEIGHBORS = 1.0f;
     public BrickSO[] BricksSOs;
@@ -24,13 +25,10 @@ public class ReplaceBrick : MonoBehaviour
     public Transform Current;
     public Transform[] Pattern;
 
-    private void Start()
-    {
-        Random.InitState(0);
-    }
-
     public List<BrickTransform> Parse(Transform[] transformBricks)
     {
+        Random.InitState(0);
+        
         List<BrickTransform> Blocks = new();
         
         TransformsRestants = transformBricks.OrderBy(p => Random.value).ToList();
@@ -44,33 +42,24 @@ public class ReplaceBrick : MonoBehaviour
             Current = TransformsRestants[0];
 
             Pattern = PatterAvailable(Current, TransformsRestants, pattern.Dimension);
-            // indexPattern--;
-            // while(Pattern.Length == 0 && indexPattern > 0)
-            // {
-            //     Pattern = PatterAvailable(Current, TransformsRestants, BricksSOs[indexPattern].Dimension);
-            //     indexPattern--;
-            // }
-
-            GameObject instance;
             
             if(Pattern.Length == 0)
             {
                 TransformsRestants.Remove(Current);
-                instance = Instantiate(BricksSOs[0].Prefab);
+                
+                Blocks.Add(new BrickTransform(){
+                    Transform = Current,
+                    BrickSO = BricksSOs[0]
+                });
             }
             else
             {
                 Pattern.ToList().ForEach(t => TransformsRestants.Remove(t));
-                instance = Instantiate(pattern.Prefab);
+                Blocks.Add(new BrickTransform(){
+                    Transform = Current,
+                    BrickSO = pattern
+                });
             }
-            
-            Blocks.Add(new BrickTransform(){
-                Transform = instance.transform,
-                BrickSO = pattern
-            });
-
-            instance.transform.position = Current.position;
-            instance.transform.localScale = Vector3.one *.2f;
         }
 
         return Blocks;
